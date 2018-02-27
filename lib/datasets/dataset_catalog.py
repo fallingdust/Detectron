@@ -35,6 +35,10 @@ IM_PREFIX = 'image_prefix'
 DEVKIT_DIR = 'devkit_directory'
 RAW_DIR = 'raw_dir'
 
+# My dataset entry keys
+DATA_DIR = 'data_dir'
+IM_SET = 'image_set'
+
 # Available datasets
 DATASETS = {
     'cityscapes_fine_instanceonly_seg_train': {
@@ -185,5 +189,25 @@ DATASETS = {
             _DATA_DIR + '/VOC2012/annotations/voc_2012_trainval.json',
         DEVKIT_DIR:
             _DATA_DIR + '/VOC2012/VOCdevkit2012'
+    },
+    'coca_no_rotate_500_train': {
+        IM_DIR:
+            _DATA_DIR + '/coca_no_rotate/images',
+        ANN_FN:
+            _DATA_DIR + '/coca_no_rotate/annotations_json/train_1.json',
+        DATA_DIR:
+            _DATA_DIR + '/coca_no_rotate',
+        IM_SET:
+            'train_1.txt'
+    },
+    'coca_no_rotate_500_val': {
+        IM_DIR:
+            _DATA_DIR + '/coca_no_rotate/images',
+        ANN_FN:
+            _DATA_DIR + '/coca_no_rotate/annotations_json/test_1.json',
+        DATA_DIR:
+            _DATA_DIR + '/coca_no_rotate',
+        IM_SET:
+            'test_1'
     }
 }

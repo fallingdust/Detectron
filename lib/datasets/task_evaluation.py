@@ -45,6 +45,7 @@ from utils.logging import send_email
 import datasets.cityscapes_json_dataset_evaluator as cs_json_dataset_evaluator
 import datasets.json_dataset_evaluator as json_dataset_evaluator
 import datasets.voc_dataset_evaluator as voc_dataset_evaluator
+import datasets.my_evaluator as my_evaluator
 
 logger = logging.getLogger(__name__)
 
@@ -93,9 +94,8 @@ def evaluate_boxes(dataset, all_boxes, output_dir, use_matlab=False):
         )
         box_results = _voc_eval_to_box_results(voc_eval)
     else:
-        raise NotImplementedError(
-            'No evaluator for dataset: {}'.format(dataset.name)
-        )
+        voc_eval = my_evaluator.evaluate_boxes(dataset, all_boxes, output_dir)
+        box_results = _voc_eval_to_box_results(voc_eval)
     return OrderedDict([(dataset.name, box_results)])
 
 

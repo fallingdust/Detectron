@@ -191,6 +191,7 @@ def _coco_bbox_results_one_category(json_dataset, boxes, cat_id):
 def _do_detection_eval(json_dataset, res_file, output_dir):
     coco_dt = json_dataset.COCO.loadRes(str(res_file))
     coco_eval = COCOeval(json_dataset.COCO, coco_dt, 'bbox')
+    coco_eval.params.maxDets = [10, 100, 300]
     coco_eval.evaluate()
     coco_eval.accumulate()
     _log_detection_eval_metrics(json_dataset, coco_eval)
@@ -228,7 +229,7 @@ def _log_detection_eval_metrics(json_dataset, coco_eval):
         precision = coco_eval.eval['precision'][
             ind_lo:(ind_hi + 1), :, cls_ind - 1, 0, 2]
         ap = np.mean(precision[precision > -1])
-        logger.info('{:.1f}'.format(100 * ap))
+        logger.info('{} {:.1f}'.format(cls, 100 * ap))
     logger.info('~~~~ Summary metrics ~~~~')
     coco_eval.summarize()
 
